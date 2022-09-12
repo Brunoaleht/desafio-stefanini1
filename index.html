@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Formulario</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $("#cadastrar").click(function () {
+                let funcionario =   {
+                    nome: $("#nomeFuncionario").val(),
+                    idade: $("#idadeFuncionario").val(),
+                    cargo: $("#cargo").val()
+                };
+                $.ajax({
+                    url: "https://dp0yvbegr1.execute-api.sa-east-1.amazonaws.com/beta",//URL AWS
+                    jsonp: "callback",
+                    method: 'POST',
+                    data : JSON.stringify({funcionario: funcionario}),
+                    async: false,
+                    success: function(respuestaSolicitud) {
+                        
+						alert(JSON.stringify(respuestaSolicitud));
+                    }
+                });
+            });
+            $("#atualizarFuncionario").click( function () {
+                let funcioById = $("#funcioById").val()
+            $.ajax({
+                url: "https://dp0yvbegr1.execute-api.sa-east-1.amazonaws.com/beta",//URL AWS
+                jsonp: "callback",
+                method: "PUT",
+                data: JSON.stringify({atualizarfuncionario: sql.map(funcioById)}),
+                async: true,
+                success: function(respuestaSolicitud) {
+                        
+						alert(JSON.stringify(respuestaSolicitud));
+                    }
+                }); 
+            });
+            $("#deleteFuncionario").click( function () {
+                let funcioById = $("#funcioById").val()
+            $.ajax({
+                url: "https://dp0yvbegr1.execute-api.sa-east-1.amazonaws.com/beta",//URL AWS
+                jsonp: "callback",
+                method: "DELETE",
+                data: JSON.stringify({deletefuncionario: sql.map(funcioById)}),
+                async: true,
+                success: function(respuestaSolicitud) {
+                        
+						alert(JSON.stringify(respuestaSolicitud));
+                    }
+                }); 
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="form">
+        <div class="tab-content">
+            <div id="signup">
+                <h1>Cadastrar Funcionario</h1>
+                <form action="/">
+                    <div class="field-wrap">
+                        <input type="text" required autocomplete="off" id="nomeFuncionario" name="nomeFuncionario" placeholder="Nome:">
+                    </div>
+                    <div class="field-wrap">
+                        <input type="number" required autocomplete="off" id="idadeFuncionario" name="idadeFuncionario" placeholder="Idade">
+                    </div>
+                    <div class="field-wrap">
+                        <input type="text" required autocomplete="off" id="cargo" name="cargo" placeholder="Cargo:">
+                    </div>
+                    <button id="cadastrar" class="button button-block">Cadastrar</button>
+                </form>    
+            </div>
+            <div id="controllsBd">
+                <h1>Controles DataBase</h1>
+                <form action="/">                
+                    <div class="field-wrap">
+                        <input type="number" required autocomplete="off" id="funcioById" placeholder="ID-Funcionario">
+                    </div>
+                    <button id="atualizarFuncionario" class="button button-block" method="put">Atualizar F-ID</button>
+                    <button id="deleteFuncionario" class="button button-block" method="delete">Deletar F-ID</button>
+                </form>
+            </div>
+        </div> 
+    </div>    
+</body>
+</html>

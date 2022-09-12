@@ -1,0 +1,21 @@
+service: Desafio-Stafinini
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: sa-east-1
+
+endpoints:
+  POST: https://dp0yvbegr1.execute-api.sa-east-1.amazonaws.com/beta/register
+  PUT: https://dp0yvbegr1.execute-api.sa-east-1.amazonaws.com/beta/register
+  DELETE: https://dp0yvbegr1.execute-api.sa-east-1.amazonaws.com/beta/register
+
+functions:
+  register:
+    handler: handler.register
+
+layers:
+  lib-common-mysql: arn:aws:lambda:sa-east-1:330510533208:layer:lib-common-mysql:1
+
