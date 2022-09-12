@@ -18,7 +18,8 @@ module.exports.register = async (event, context, callback) => {
     callback(null, 'funcionario Registrato.');
 
     if(event.atualizarfuncionario){
-
+      sql = "PUT funcionario (funcionario) VALUES ('"+event.putfuncionario+"')";
+      callback(null, 'Funcionario deletado')
     }
 
     
